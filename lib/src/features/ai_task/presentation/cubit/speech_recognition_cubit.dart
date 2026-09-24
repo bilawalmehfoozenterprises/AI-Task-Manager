@@ -43,9 +43,7 @@ class SpeechRecognitionCubit extends Cubit<SpeechRecognitionState> {
         break;
       case SpeechRecognitionStatus.error:
         emit(
-          SpeechRecognitionError(
-            message: _speechRecognitionService.recognizedWordsNotifier.value,
-          ),
+          SpeechRecognitionError(message: _speechRecognitionService.lastError),
         );
         break;
       case SpeechRecognitionStatus.notAvailable:

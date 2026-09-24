@@ -44,45 +44,48 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.todo == null ? context.loc.addTodo : context.loc.editTodo,
+    return BlocProvider(
+      create: (_) => DateCubit(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            widget.todo == null ? context.loc.addTodo : context.loc.editTodo,
+          ),
         ),
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Sizes.p16),
-          child: ListView(
-            children: [
-              gapH8,
-              CustomTextField(
-                key: kTodoNameKey,
-                label: context.loc.title,
-                controller: _titleController,
-              ),
-              gapH8,
-              CustomTextField(
-                key: kTodoDescriptionKey,
-                maxLines: 8,
-                maxLength: 1000,
-                hintText: context.loc.description,
-                controller: _descriptionController,
-              ),
-              gapH16,
-              // Handle null case properly for DateSection
-              DeadlineSection(deadline: widget.todo?.deadline),
-              gapH16,
-
-              // Save Todo Button
-              BlocBuilder<DateCubit, DateTime?>(
-                builder: (context, deadline) => CustomFilledButton(
-                  text: context.loc.save,
-                  onPressed: () => _saveTodo(context, deadline),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: Sizes.p16),
+            child: ListView(
+              children: [
+                gapH8,
+                CustomTextField(
+                  key: kTodoNameKey,
+                  label: context.loc.title,
+                  controller: _titleController,
                 ),
-              ),
-              gapH4,
-            ],
+                gapH8,
+                CustomTextField(
+                  key: kTodoDescriptionKey,
+                  maxLines: 8,
+                  maxLength: 1000,
+                  hintText: context.loc.description,
+                  controller: _descriptionController,
+                ),
+                gapH16,
+                // Handle null case properly for DateSection
+                DeadlineSection(deadline: widget.todo?.deadline),
+                gapH16,
+
+                // Save Todo Button
+                BlocBuilder<DateCubit, DateTime?>(
+                  builder: (context, deadline) => CustomFilledButton(
+                    text: context.loc.save,
+                    onPressed: () => _saveTodo(context, deadline),
+                  ),
+                ),
+                gapH4,
+              ],
+            ),
           ),
         ),
       ),

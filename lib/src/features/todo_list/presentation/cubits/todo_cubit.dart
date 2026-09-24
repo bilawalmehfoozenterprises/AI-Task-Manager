@@ -31,15 +31,17 @@ class TodoCubit extends Cubit<TodoState> {
     return await _todoRepository.getTodo(id);
   }
 
-  /// Adds a new todo, then reloads list
-  Future<void> addTodo(Todo todo) async {
+  /// Adds a new todo, then reloads list. Returns false if saving failed.
+  Future<bool> addTodo(Todo todo) async {
     try {
       await _todoRepository.addTodo(todo);
       _logger.info('Todo added: ${todo.name}');
       await loadTodos();
+      return true;
     } catch (e, s) {
       _logger.severe('Failed to add todo', error: e, stackTrace: s);
       emit(TodoError(e.toString()));
+      return false;
     }
   }
 

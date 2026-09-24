@@ -6,7 +6,6 @@ import 'package:todo_app/src/app.dart';
 import 'package:todo_app/src/features/todo_list/data/app_database.dart';
 import 'package:todo_app/src/features/todo_list/data/drift_repository.dart';
 import 'package:todo_app/src/features/todo_list/domain/todo_repository.dart';
-import 'package:todo_app/src/features/todo_list/presentation/cubits/date_cubit.dart';
 import 'package:todo_app/src/features/todo_list/presentation/cubits/todo_cubit.dart';
 import 'package:todo_app/src/utils/app_logger.dart';
 
@@ -36,7 +35,6 @@ class Robot {
       MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => TodoCubit(_repository, logger)),
-          BlocProvider(create: (_) => DateCubit()),
         ],
         child: const MyApp(),
       ),

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:todo_app/src/features/ai_task/application/ai_service.dart';
 import 'package:todo_app/src/features/ai_task/application/speech_recognition_service.dart';
 import 'package:todo_app/src/features/ai_task/presentation/cubit/speech_recognition_cubit.dart';
 import 'package:todo_app/src/features/ai_task/presentation/cubit/ai_task_cubit.dart';
 import 'package:todo_app/src/features/ai_task/presentation/cubit/ai_task_state.dart';
+import 'package:todo_app/src/features/todo_list/presentation/cubits/todo_cubit.dart';
 import 'package:todo_app/src/utils/extensions.dart';
 import 'package:todo_app/src/common/alert_dialogues.dart';
 import 'package:todo_app/src/features/ai_task/presentation/widgets/message_bubble.dart';
@@ -17,9 +20,20 @@ class AiTaskInputScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider(
       create: (context) => SpeechRecognitionService(),
-      child: BlocProvider(
-        create: (context) =>
-            SpeechRecognitionCubit(context.read<SpeechRecognitionService>()),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => SpeechRecognitionCubit(
+              context.read<SpeechRecognitionService>(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => AiTaskCubit(
+              GetIt.instance<AiService>(),
+              context.read<TodoCubit>(),
+            ),
+          ),
+        ],
         child: const _AiTaskInputView(),
       ),
     );
@@ -59,7 +73,8 @@ class _AiTaskInputViewState extends State<_AiTaskInputView> {
                 if (confirmed == true) {
                   if (!context.mounted) return;
                   context.read<AiTaskCubit>().confirmTask(state.taskDraft!);
-                } else { // User cancelled
+                } else {
+                  // User cancelled
                   if (!context.mounted) return;
                   context.read<AiTaskCubit>().clearTaskDraft();
                 }

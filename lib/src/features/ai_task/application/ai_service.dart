@@ -62,11 +62,12 @@ class AiService {
         .replaceAll('{USER_MESSAGE}', userMessage);
   }
 
-  /// Helper function to extract JSON from markdown code block
+  /// Strips a markdown code fence (``` or ```json) around the JSON, if any.
   String _extractResponseFromMarkdown(String markdown) {
-    if (markdown.startsWith('```json') && markdown.endsWith('```')) {
-      return markdown.substring(7, markdown.length - 3).trim();
-    }
-    return markdown;
+    final text = markdown.trim();
+    final start = text.indexOf('{');
+    final end = text.lastIndexOf('}');
+    if (start == -1 || end < start) return text;
+    return text.substring(start, end + 1);
   }
 }

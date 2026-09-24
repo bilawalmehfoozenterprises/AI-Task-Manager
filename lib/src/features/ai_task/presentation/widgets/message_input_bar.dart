@@ -52,11 +52,14 @@ class _MessageInputBarState extends State<MessageInputBar> {
   Widget build(BuildContext context) {
     return BlocListener<SpeechRecognitionCubit, SpeechRecognitionState>(
       listener: (context, state) {
-        String text = '';
+        // Only speech results change the text; errors keep what was typed.
+        final String text;
         if (state is SpeechRecognitionListening) {
           text = state.recognizedWords;
         } else if (state is SpeechRecognitionAvailable) {
           text = state.recognizedWords;
+        } else {
+          return;
         }
 
         if (_controller.text != text) {
@@ -132,7 +135,9 @@ class _MessageInputBarState extends State<MessageInputBar> {
                         ),
                         IconButton(
                           icon: const Icon(Icons.send),
-                          onPressed: state is SpeechRecognitionListening ? null : _handleSend,
+                          onPressed: state is SpeechRecognitionListening
+                              ? null
+                              : _handleSend,
                         ),
                       ],
                     );

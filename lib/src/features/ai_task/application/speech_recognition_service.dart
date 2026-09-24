@@ -16,6 +16,10 @@ enum SpeechRecognitionStatus {
 class SpeechRecognitionService {
   final SpeechToText _speechToText = SpeechToText();
   bool _isInitialized = false;
+  bool _isDisposed = false;
+
+  String _lastError = '';
+  String get lastError => _lastError;
 
   final ValueNotifier<String> _recognizedWordsNotifier = ValueNotifier('');
   ValueNotifier<String> get recognizedWordsNotifier => _recognizedWordsNotifier;
@@ -36,10 +40,12 @@ class SpeechRecognitionService {
 
     _isInitialized = await _speechToText.initialize(
       onError: (error) {
+        if (_isDisposed) return;
+        _lastError = error.errorMsg;
         _statusNotifier.value = SpeechRecognitionStatus.error;
-        _recognizedWordsNotifier.value = 'Error: ${error.errorMsg}';
       },
       onStatus: (status) {
+        if (_isDisposed) return;
         switch (status) {
           case 'listening':
             _statusNotifier.value = SpeechRecognitionStatus.listening;
@@ -77,8 +83,14 @@ class SpeechRecognitionService {
     _recognizedWordsNotifier.value = prefix; // Initialize with prefix
     _speechToText.listen(
       onResult: (SpeechRecognitionResult result) {
+        if (_isDisposed) return;
         // Append to prefix
-        _recognizedWordsNotifier.value = prefix + (prefix.isNotEmpty && result.recognizedWords.isNotEmpty ? ' ' : '') + result.recognizedWords;
+        _recognizedWordsNotifier.value =
+            prefix +
+            (prefix.isNotEmpty && result.recognizedWords.isNotEmpty
+                ? ' '
+                : '') +
+            result.recognizedWords;
         if (result.finalResult) {
           _statusNotifier.value = SpeechRecognitionStatus.stopped;
         }
@@ -102,8 +114,9 @@ class SpeechRecognitionService {
   }
 
   void dispose() {
+    _isDisposed = true;
+    _speechToText.cancel();
     _recognizedWordsNotifier.dispose();
     _statusNotifier.dispose();
-    _speechToText.cancel();
   }
 }

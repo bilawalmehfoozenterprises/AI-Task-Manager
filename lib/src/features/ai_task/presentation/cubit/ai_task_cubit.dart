@@ -6,6 +6,7 @@ import 'package:todo_app/src/features/ai_task/domain/chat_message.dart';
 import 'package:todo_app/src/features/ai_task/presentation/cubit/ai_task_state.dart';
 import 'package:todo_app/src/features/todo_list/domain/todo_model.dart';
 import 'package:todo_app/src/features/todo_list/presentation/cubits/todo_cubit.dart';
+import 'package:todo_app/src/localization/string_hardcoded.dart';
 
 class AiTaskCubit extends Cubit<AiTaskState> {
   final AiService _aiService;
@@ -39,7 +40,16 @@ class AiTaskCubit extends Cubit<AiTaskState> {
         deadline: draft.deadline,
         isCompleted: false,
       );
-      await _todoCubit.addTodo(todo);
+      final saved = await _todoCubit.addTodo(todo);
+      if (!saved) {
+        emit(
+          state.copyWith(
+            status: AiStateStatus.error,
+            errorMessage: 'Failed to save the task.'.hardcoded,
+          ),
+        );
+        return;
+      }
       emit(state.copyWith(status: AiStateStatus.saved));
     } catch (e) {
       emit(
@@ -53,7 +63,7 @@ class AiTaskCubit extends Cubit<AiTaskState> {
 
   // Clears the task draft from the state
   void clearTaskDraft() {
-    emit(state.copyWith(taskDraft: null, status: AiStateStatus.success));
+    emit(AiTaskState(messages: state.messages, status: AiStateStatus.success));
   }
 
   // -----------------Helpers-----------------

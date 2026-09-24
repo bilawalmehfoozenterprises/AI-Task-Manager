@@ -8,11 +8,9 @@ import 'package:get_it/get_it.dart';
 import 'package:todo_app/firebase_options.dart';
 import 'package:todo_app/src/app.dart';
 import 'package:todo_app/src/features/ai_task/application/ai_service.dart';
-import 'package:todo_app/src/features/ai_task/presentation/cubit/ai_task_cubit.dart';
 import 'package:todo_app/src/features/todo_list/data/app_database.dart';
 import 'package:todo_app/src/features/todo_list/data/drift_repository.dart';
 import 'package:todo_app/src/features/todo_list/domain/todo_repository.dart';
-import 'package:todo_app/src/features/todo_list/presentation/cubits/date_cubit.dart';
 import 'package:todo_app/src/features/todo_list/presentation/cubits/todo_cubit.dart';
 import 'package:todo_app/src/localization/string_hardcoded.dart';
 import 'package:todo_app/src/utils/app_logger.dart';
@@ -55,6 +53,7 @@ class AppInitializer {
     if (forTesting) return;
     final model = FirebaseAI.googleAI().generativeModel(
       model: 'gemini-2.5-flash',
+      generationConfig: GenerationConfig(responseMimeType: 'application/json'),
     );
     getIt.registerSingleton<AiService>(AiService(model: model));
   }
@@ -69,10 +68,16 @@ class AppInitializer {
         'Flutter Error',
         error: details.exception,
         stackTrace: details.stack,
+        fatal: true,
       );
     };
     PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
-      logger.severe('Platform Error', error: error, stackTrace: stack);
+      logger.severe(
+        'Platform Error',
+        error: error,
+        stackTrace: stack,
+        fatal: true,
+      );
       return true;
     };
     ErrorWidget.builder = (FlutterErrorDetails details) {
@@ -106,13 +111,6 @@ class AppInitializer {
       providers: [
         BlocProvider<TodoCubit>(
           create: (BuildContext context) => TodoCubit(repo, logger),
-        ),
-        BlocProvider<DateCubit>(create: (BuildContext context) => DateCubit()),
-        BlocProvider<AiTaskCubit>(
-          create: (context) => AiTaskCubit(
-            GetIt.instance<AiService>(),
-            context.read<TodoCubit>(),
-          ),
         ),
       ],
       child: const MyApp(),

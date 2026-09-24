@@ -6,7 +6,12 @@ import 'package:flutter/foundation.dart';
 abstract class Logger {
   void info(String message);
   void warning(String message);
-  void severe(String message, {Object? error, StackTrace? stackTrace});
+  void severe(
+    String message, {
+    Object? error,
+    StackTrace? stackTrace,
+    bool fatal = false,
+  });
 }
 
 /// Concrete implementation of the [Logger] interface.
@@ -37,7 +42,12 @@ class AppLogger implements Logger {
   }
 
   @override
-  void severe(String message, {Object? error, StackTrace? stackTrace}) {
+  void severe(
+    String message, {
+    Object? error,
+    StackTrace? stackTrace,
+    bool fatal = false,
+  }) {
     _log('SEVERE', message, error: error, stackTrace: stackTrace);
     // Record severe errors with Firebase Crashlytics.
     if (!isTesting) {
@@ -45,7 +55,7 @@ class AppLogger implements Logger {
         error,
         stackTrace,
         reason: message,
-        fatal: true,
+        fatal: fatal,
       );
     }
   }
@@ -61,10 +71,10 @@ class AppLogger implements Logger {
     if (kDebugMode) {
       debugPrint("[$level] [${DateTime.now()}] $message");
       if (error != null) {
-        debugPrint('Error: \$error');
+        debugPrint('Error: $error');
       }
       if (stackTrace != null) {
-        debugPrint('StackTrace: \$stackTrace');
+        debugPrint('StackTrace: $stackTrace');
       }
     }
   }
