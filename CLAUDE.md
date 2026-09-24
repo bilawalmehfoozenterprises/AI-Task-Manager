@@ -17,6 +17,10 @@
 - `flutter analyze` must show 0 issues.
 - `flutter test` must pass.
 
+## Running the app
+
+- Run with `flutter run --print-dtd` so the Dart MCP server can connect to the running app (hot reload, runtime errors, widget inspector).
+
 ## Releases
 
 - Never push a release or patch tag without asking first.
