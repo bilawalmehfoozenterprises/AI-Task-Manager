@@ -1,6 +1,6 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:todo_app/src/app_initializer.dart';
+import 'package:lifely/src/app/bootstrap.dart';
 
-void main() async {
-  runApp(await AppInitializer().initializeAndRun());
+Future<void> main() async {
+  runApp(await bootstrap());
 }
