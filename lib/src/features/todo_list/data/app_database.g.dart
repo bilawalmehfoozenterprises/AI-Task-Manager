@@ -549,7 +549,16 @@ class $$TodosTableTableManager
                 isCompleted: isCompleted,
               ),
           withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .map(
+                (e) => (
+                  e.readTable<$TodosTable, TodoEntry>(table),
+                  BaseReferences<_$AppDatabase, $TodosTable, TodoEntry>(
+                    db,
+                    table,
+                    e,
+                  ),
+                ),
+              )
               .toList(),
           prefetchHooksCallback: null,
         ),

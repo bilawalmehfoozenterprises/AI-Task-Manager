@@ -48,3 +48,5 @@ lib/firebase_options.dart
 
 # AI generated files
 AI/
+
+.env
