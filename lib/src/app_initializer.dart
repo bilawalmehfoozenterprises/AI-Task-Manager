@@ -1,6 +1,7 @@
 import 'package:drift/native.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ai/firebase_ai.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,13 +47,23 @@ class AppInitializer {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+    // Debug builds (emulators) use a debug token registered in the console;
+    // release builds prove they are the real app via Play Integrity / App Attest.
+    await FirebaseAppCheck.instance.activate(
+      providerAndroid: kDebugMode
+          ? const AndroidDebugProvider()
+          : const AndroidPlayIntegrityProvider(),
+      providerApple: kDebugMode
+          ? const AppleDebugProvider()
+          : const AppleAppAttestWithDeviceCheckFallbackProvider(),
+    );
   }
 
   void _setupDependencies() {
     getIt.registerSingleton<Logger>(AppLogger(isTesting: forTesting));
     if (forTesting) return;
     final model = FirebaseAI.googleAI().generativeModel(
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3.8-flash',
       generationConfig: GenerationConfig(responseMimeType: 'application/json'),
     );
     getIt.registerSingleton<AiService>(AiService(model: model));

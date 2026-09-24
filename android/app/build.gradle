@@ -58,7 +58,7 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
             firebaseAppDistribution {
-                appId = "1:273380534383:android:659f81529a4d2991e5459a"
+                appId = "1:70581163281:android:82bf0b1584defa4e0ca8b0"
                 serviceCredentialsFile = System.getenv("FIREBASE_SERVICE_ACCOUNT_KEY_PATH") // This path will be set by Codemagic
                 releaseNotes = "New build distributed via Codemagic CI/CD."
                 groups = "qa-team"
