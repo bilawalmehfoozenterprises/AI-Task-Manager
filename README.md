@@ -1,9 +1,9 @@
-# Todo App
+# AI Task Manager
 
-A simple yet powerful Todo app developed using `drift` (formerly `moor`) as the backend and `flutter_bloc` for state management. This app allows users to create, update, and manage their todos efficiently with a clean and intuitive UI.
+A personal app for managing daily life, powered by AI. It starts with task management and will grow to cover everything done on a daily basis. Built with `drift` for local storage and `flutter_bloc` for state management, with a clean and intuitive UI.
 
 ## Features
-- **Add, Edit, and Delete Todos**: Easily manage your tasks.
+- **Add, Edit, and Delete Tasks**: Easily manage your daily tasks.
 - **Clean State Management**: Leveraging `flutter_bloc` for predictable and maintainable state.
 - **High-Performance Local Storage**: Using `drift` for a fast and reliable local database.
 - **Error Reporting**: Integrated with **Firebase Crashlytics** for real-time crash monitoring.
@@ -44,21 +44,21 @@ This will trigger the `android-patch-distribution` workflow, which deploys the c
 
 ## Screenshots
 
-### 1. My Todos Screen
+### 1. My Tasks Screen
 <div>
-  <img src="./github_readme_data/images/todo-screen.jpg" width="200" height="400" alt="Todo Screen">
-  <img src="./github_readme_data/images/todo-screen-completed.jpg" width="200" height="400" alt="Todo Screen Completed">
+  <img src="./github_readme_data/images/todo-screen.jpg" width="200" height="400" alt="Tasks Screen">
+  <img src="./github_readme_data/images/todo-screen-completed.jpg" width="200" height="400" alt="Tasks Screen Completed">
 </div>
 
-### 2. Todo Details Screen
+### 2. Task Details Screen
 <div>
-  <img src="./github_readme_data/images/Screenshot_20241003_190755.jpg" width="200" height="400" alt="Todo Details Screen">
+  <img src="./github_readme_data/images/Screenshot_20241003_190755.jpg" width="200" height="400" alt="Task Details Screen">
 </div>
 
-### 3. Add & Edit Todo Screen
+### 3. Add & Edit Task Screen
 <div>
-  <img src="./github_readme_data/images/Screenshot_20241003_190820.jpg" width="200" height="400" alt="Add Todo Screen">
-  <img src="./github_readme_data/images/Screenshot_20241003_190803.jpg" width="200" height="400" alt="Edit Todo Screen">
+  <img src="./github_readme_data/images/Screenshot_20241003_190820.jpg" width="200" height="400" alt="Add Task Screen">
+  <img src="./github_readme_data/images/Screenshot_20241003_190803.jpg" width="200" height="400" alt="Edit Task Screen">
 </div>
 
 ## Project Structure
@@ -85,8 +85,8 @@ Make sure you have the following tools installed:
 ### 2. Clone the Repository
 
 ```bash
-git clone https://github.com/Bilawal-Mehfooz-Malik/todo_app
-cd todo_app
+git clone https://github.com/bilawalmehfoozenterprises/AI-Task-Manager
+cd AI-Task-Manager
 ```
 
 ### 3. Install Dependencies

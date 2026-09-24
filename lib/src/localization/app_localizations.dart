@@ -97,7 +97,7 @@ abstract class AppLocalizations {
   /// The title of the application
   ///
   /// In en, this message translates to:
-  /// **'TODO'**
+  /// **'Lifely'**
   String get app_title;
 
   /// No description provided for @myTodos.
