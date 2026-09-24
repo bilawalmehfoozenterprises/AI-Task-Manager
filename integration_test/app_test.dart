@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:todo_app/src/app_initializer.dart';
-import 'package:todo_app/src/common/custom_filled_button.dart';
 
 import 'package:todo_app/src/common/message.dart';
 import 'package:todo_app/src/features/add_todo/add_todo_screen.dart';
@@ -45,7 +44,7 @@ void main() {
         await tester.pumpAndSettle();
 
         // Tap the save button
-        await tester.tap(find.byType(CustomFilledButton));
+        await tester.tap(find.byKey(kSaveTodoKey));
         await tester.pumpAndSettle();
 
         // Verify that the new task is displayed

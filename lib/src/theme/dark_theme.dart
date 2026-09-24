@@ -62,7 +62,15 @@ final darkTheme = ThemeData(
 
   // [Icon Button Theme]
   iconButtonTheme: const IconButtonThemeData(
-    style: ButtonStyle(padding: WidgetStatePropertyAll(EdgeInsets.zero)),
+    style: ButtonStyle(
+      padding: WidgetStatePropertyAll(EdgeInsets.zero),
+      shape: WidgetStatePropertyAll(_shape),
+    ),
+  ),
+
+  // [Text Field Theme]
+  inputDecorationTheme: const InputDecorationTheme(
+    border: OutlineInputBorder(),
   ),
 
   // [Card Theme]

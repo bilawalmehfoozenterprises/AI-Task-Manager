@@ -3,15 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/src/utils/extensions.dart';
 import 'package:todo_app/src/constants/app_sizes.dart';
 import 'package:todo_app/src/common/alert_dialogues.dart';
-import 'package:todo_app/src/common/custom_text_field.dart';
 import 'package:todo_app/src/features/todo_list/domain/todo_model.dart';
-import 'package:todo_app/src/common/custom_filled_button.dart';
 import 'package:todo_app/src/features/todo_list/presentation/cubits/date_cubit.dart';
 import 'package:todo_app/src/features/todo_list/presentation/cubits/todo_cubit.dart';
 import 'package:todo_app/src/features/add_todo/deadline_section.dart';
 
 const kTodoNameKey = ValueKey('Todo-Name');
 const kTodoDescriptionKey = ValueKey('Todo-Description');
+const kSaveTodoKey = ValueKey('Save-Todo');
 
 class AddTodoScreen extends StatefulWidget {
   const AddTodoScreen({super.key, this.todo});
@@ -58,18 +57,20 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
             child: ListView(
               children: [
                 gapH8,
-                CustomTextField(
+                TextField(
                   key: kTodoNameKey,
-                  label: context.loc.title,
                   controller: _titleController,
+                  decoration: InputDecoration(labelText: context.loc.title),
                 ),
                 gapH8,
-                CustomTextField(
+                TextField(
                   key: kTodoDescriptionKey,
                   maxLines: 8,
                   maxLength: 1000,
-                  hintText: context.loc.description,
                   controller: _descriptionController,
+                  decoration: InputDecoration(
+                    hintText: context.loc.description,
+                  ),
                 ),
                 gapH16,
                 // Handle null case properly for DateSection
@@ -78,9 +79,10 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
 
                 // Save Todo Button
                 BlocBuilder<DateCubit, DateTime?>(
-                  builder: (context, deadline) => CustomFilledButton(
-                    text: context.loc.save,
+                  builder: (context, deadline) => FilledButton(
+                    key: kSaveTodoKey,
                     onPressed: () => _saveTodo(context, deadline),
+                    child: Text(context.loc.save),
                   ),
                 ),
                 gapH4,

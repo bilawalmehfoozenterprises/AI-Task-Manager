@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/src/common/custom_filled_button.dart';
 import 'package:todo_app/src/utils/extensions.dart';
 import 'package:todo_app/src/constants/app_sizes.dart';
 import 'package:todo_app/src/utils/date_formatter.dart';
 import 'package:todo_app/src/common/alert_dialogues.dart';
-import 'package:todo_app/src/common/custom_icon_button.dart';
 import 'package:todo_app/src/features/todo_list/domain/todo_model.dart';
 import 'package:todo_app/src/features/todo_list/presentation/cubits/todo_cubit.dart';
 import 'package:todo_app/src/features/add_todo/add_todo_screen.dart';
@@ -75,14 +73,16 @@ class TodoDetailScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        CustomIconButton(
-          icon: Icons.close,
-          onTap: () => Navigator.of(context).pop(),
+        IconButton.filledTonal(
+          icon: const Icon(Icons.close),
+          tooltip: MaterialLocalizations.of(context).closeButtonTooltip,
+          onPressed: () => Navigator.of(context).pop(),
         ),
-        CustomIconButton(
+        IconButton.filledTonal(
+          icon: const Icon(Icons.delete),
           color: context.color.error,
-          icon: Icons.delete,
-          onTap: () => _onDelete(context),
+          tooltip: MaterialLocalizations.of(context).deleteButtonTooltip,
+          onPressed: () => _onDelete(context),
         ),
       ],
     );
@@ -130,9 +130,9 @@ class TodoDetailScreen extends StatelessWidget {
   }
 
   Widget _buildEditButton(BuildContext context) {
-    return CustomFilledButton(
+    return FilledButton(
       onPressed: () => _navigateToEdit(context),
-      text: context.loc.editTodo,
+      child: Text(context.loc.editTodo),
     );
   }
 }
