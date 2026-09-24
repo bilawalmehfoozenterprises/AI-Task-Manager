@@ -1,51 +1,28 @@
-import 'dart:io';
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:todo_app/src/utils/extensions.dart';
 
-/// Generic function to show a platform-aware Material or Cupertino dialog
+/// Shows a confirm dialog: Cupertino style on iOS/macOS, Material elsewhere.
+/// Returns true for the default action.
 Future<bool?> showCustomAlertDialog({
   required BuildContext context,
   String? title,
   String? content,
   String? cancelActionText,
   String? defaultActionText,
-}) async {
-  if (kIsWeb || !Platform.isIOS) {
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: title != null ? Text(title) : null,
-        content: content != null ? Text(content) : null,
-        actions: [
-          if (cancelActionText != null)
-            TextButton(
-              child: Text(cancelActionText),
-              onPressed: () => Navigator.of(context).pop(false),
-            ),
-          if (defaultActionText != null)
-            FilledButton(
-              child: Text(defaultActionText),
-              onPressed: () => Navigator.of(context).pop(true),
-            ),
-        ],
-      ),
-    );
-  }
-  return showCupertinoDialog(
+}) {
+  return showAdaptiveDialog<bool>(
     context: context,
-    builder: (context) => CupertinoAlertDialog(
+    builder: (context) => AlertDialog.adaptive(
       title: title != null ? Text(title) : null,
       content: content != null ? Text(content) : null,
       actions: [
         if (cancelActionText != null)
-          CupertinoDialogAction(
+          TextButton(
             child: Text(cancelActionText),
             onPressed: () => Navigator.of(context).pop(false),
           ),
         if (defaultActionText != null)
-          CupertinoDialogAction(
+          FilledButton(
             child: Text(defaultActionText),
             onPressed: () => Navigator.of(context).pop(true),
           ),
@@ -54,7 +31,7 @@ Future<bool?> showCustomAlertDialog({
   );
 }
 
-/// Generic function to show a platform-aware Material or Cupertino error dialog
+/// Shows a Material error dialog with a single OK button.
 Future<void> showExceptionAlertDialog({
   required BuildContext context,
   String? title,

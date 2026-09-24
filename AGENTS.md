@@ -6,6 +6,7 @@
 - Keep logic in Cubits, not in `build` methods. Split big widgets into small ones.
 - Use spacing and size constants from `lib/src/constants/app_sizes.dart`. No raw numbers.
 - Use `context.color` for colors. No hardcoded colors.
+- Import `package:material_ui/material_ui.dart`, never `package:flutter/material.dart`. Don't import `cupertino_ui` directly; for iOS styling use Material's `.adaptive` widgets (e.g. `showAdaptiveDialog`, `AlertDialog.adaptive`).
 - Style widgets through the app theme (`lib/src/theme/`). Don't make wrapper widgets just for styling; use built-in widgets like `FilledButton`, `TextField`, `IconButton`.
 - Put user-facing text in `lib/src/localization/app_en.arb` and read it with `context.loc`. Run `flutter gen-l10n` after editing it.
 - Pin exact package versions in `pubspec.yaml`. No `^`.

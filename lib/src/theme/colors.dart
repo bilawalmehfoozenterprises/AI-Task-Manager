@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 // [Dark Theme Colors]
 const darkPrimaryColor = Color.fromRGBO(134, 135, 231, 1);

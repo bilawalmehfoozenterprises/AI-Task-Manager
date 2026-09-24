@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:todo_app/src/constants/app_sizes.dart';
 import 'package:todo_app/src/features/ai_task/domain/chat_message.dart';
 import 'package:todo_app/src/utils/extensions.dart';
