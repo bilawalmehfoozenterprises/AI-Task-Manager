@@ -15,7 +15,6 @@ migrate_working_dir/
 *.ipr
 *.iws
 .idea/
-/github_readme_data/apk/todo.apk
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
@@ -45,8 +44,5 @@ app.*.map.json
 
 # Firebase
 lib/firebase_options.dart
-
-# AI generated files
-AI/
 
 .env
