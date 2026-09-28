@@ -13,7 +13,7 @@ void main() {
   testWidgets('adding a task shows it in the list', (tester) async {
     await tester.pumpWidget(await bootstrap(forTesting: true));
     await tester.pumpAndSettle();
-    expect(find.byType(CenteredMessage), findsOneWidget);
+    expect(find.byType(CenteredMessage), findsWidgets);
 
     await tester.tap(find.byKey(kAddTaskKey));
     await tester.pumpAndSettle();

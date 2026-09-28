@@ -71,6 +71,9 @@ final darkTheme = ThemeData(
     border: OutlineInputBorder(),
   ),
 
+  // [Tab Bar Theme]
+  tabBarTheme: const TabBarThemeData(dividerColor: darkSecondaryColor),
+
   // [Card Theme]
   cardTheme: const CardThemeData(color: darkSecondaryColor, shape: _shape),
 

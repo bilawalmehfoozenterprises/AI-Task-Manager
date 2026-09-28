@@ -112,11 +112,23 @@ abstract class AppLocalizations {
   /// **'No tasks yet'**
   String get noTasksFound;
 
-  /// No description provided for @completedTasks.
+  /// No description provided for @pendingTab.
   ///
   /// In en, this message translates to:
-  /// **'Completed Tasks'**
-  String get completedTasks;
+  /// **'Pending'**
+  String get pendingTab;
+
+  /// No description provided for @completedTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get completedTab;
+
+  /// No description provided for @noCompletedTasks.
+  ///
+  /// In en, this message translates to:
+  /// **'No completed tasks yet'**
+  String get noCompletedTasks;
 
   /// No description provided for @deadline.
   ///

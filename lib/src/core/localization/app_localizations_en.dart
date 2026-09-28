@@ -19,7 +19,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noTasksFound => 'No tasks yet';
 
   @override
-  String get completedTasks => 'Completed Tasks';
+  String get pendingTab => 'Pending';
+
+  @override
+  String get completedTab => 'Completed';
+
+  @override
+  String get noCompletedTasks => 'No completed tasks yet';
 
   @override
   String get deadline => 'Deadline:';
