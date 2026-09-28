@@ -2,7 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:lifely/src/core/constants/app_sizes.dart';
 import 'package:lifely/src/core/layout/window_size_class.dart';
 import 'package:lifely/src/core/widgets/centered_message.dart';
-import 'package:lifely/src/features/task_list/presentation/widgets/task_tile.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/task_list/task_tile.dart';
 import 'package:lifely/src/shared/task/domain/task.dart';
 
 /// One tab's tasks, or [emptyMessage] when there are none.

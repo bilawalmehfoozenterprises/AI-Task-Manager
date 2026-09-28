@@ -3,10 +3,11 @@ import 'dart:math';
 import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:signals_flutter/signals_flutter.dart';
-import 'package:lifely/src/features/task_list/presentation/controller/letter_burst.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/letters/letter_burst.dart';
 import 'package:lifely/src/features/task_list/presentation/controller/letter_effect_controller.dart';
-import 'package:lifely/src/features/task_list/presentation/controller/letter_simulation.dart';
-import 'package:lifely/src/features/task_list/presentation/widgets/letter_painter.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/letters/letter_simulation.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/letters/letter_painter.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/letters/letter_sheet.dart';
 
 /// Draws flying task-title letters over the list. Taps pass through it.
 /// The letters are cleared when the screen closes.
@@ -25,6 +26,7 @@ class _LetterLayerState extends State<LetterLayer>
   late final _ticker = createTicker(_onTick);
   late final EffectCleanup _stopListening;
   var _lastTick = Duration.zero;
+  var _pixelRatio = 1.0;
 
   @override
   void initState() {
@@ -47,15 +49,12 @@ class _LetterLayerState extends State<LetterLayer>
 
   void _add(LetterBurst burst) {
     final box = context.findRenderObject();
-    if (box is! RenderBox) return;
-    for (final letter in burst.letters) {
-      final glyph = TextPainter(
-        text: TextSpan(text: letter.char, style: burst.style),
-        textDirection: .ltr,
-        textScaler: burst.textScaler,
-      )..layout();
-      final rect = letter.rect.shift(box.globalToLocal(.zero));
-      _simulation.add(Letter(letter.char, rect), glyph, burst.motion);
+    if (box is! RenderBox || burst.letters.isEmpty) return;
+    final (sheet, spots) = drawLetterSheet(burst, _pixelRatio);
+    final origin = box.globalToLocal(.zero);
+    for (final (i, letter) in burst.letters.indexed) {
+      final placed = Letter(letter.char, letter.rect.shift(origin));
+      _simulation.add(placed, sheet, spots[i], burst.motion);
     }
     if (!_ticker.isActive) {
       _lastTick = Duration.zero;
@@ -73,10 +72,15 @@ class _LetterLayerState extends State<LetterLayer>
 
   @override
   Widget build(BuildContext context) {
+    // Letters are drawn sharp for this screen's pixel density.
+    _pixelRatio = MediaQuery.devicePixelRatioOf(context);
     return IgnorePointer(
-      child: CustomPaint(
-        painter: LetterPainter(_simulation, repaint: _repaint),
-        size: .infinite,
+      // Keeps each frame's redraw to the letters, not the list around them.
+      child: RepaintBoundary(
+        child: CustomPaint(
+          painter: LetterPainter(_simulation, repaint: _repaint),
+          size: .infinite,
+        ),
       ),
     );
   }

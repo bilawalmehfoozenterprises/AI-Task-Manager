@@ -5,7 +5,7 @@ import 'package:lifely/src/core/utils/context_extensions.dart';
 import 'package:lifely/src/core/widgets/centered_loading.dart';
 import 'package:lifely/src/core/widgets/centered_message.dart';
 import 'package:lifely/src/features/task_list/presentation/controller/task_list_controller.dart';
-import 'package:lifely/src/features/task_list/presentation/widgets/task_tab.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/task_list/task_tab.dart';
 
 /// Loading, error, or the two tabs' lists. Rebuilds when the tasks change.
 class TaskListView extends SignalWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lifely/src/features/task_list/presentation/controller/letter_burst.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/letters/letter_burst.dart';
 import 'package:lifely/src/features/task_list/presentation/controller/letter_effect_controller.dart';
 import 'package:material_ui/material_ui.dart';
 

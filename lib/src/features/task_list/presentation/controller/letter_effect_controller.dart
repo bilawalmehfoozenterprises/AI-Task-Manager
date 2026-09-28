@@ -1,5 +1,5 @@
 import 'package:signals_flutter/signals_flutter.dart';
-import 'package:lifely/src/features/task_list/presentation/controller/letter_burst.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/letters/letter_burst.dart';
 
 /// Passes letter bursts from task rows to the letter layer that draws them.
 class LetterEffectController {
