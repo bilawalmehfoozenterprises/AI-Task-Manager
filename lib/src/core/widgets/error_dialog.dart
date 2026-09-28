@@ -13,7 +13,7 @@ Future<void> showErrorDialog({
       title: title != null ? Text(title) : null,
       content: Text(message),
       actions: [
-        FilledButton(
+        TextButton(
           onPressed: () => Navigator.of(context).pop(),
           child: Text(context.loc.ok),
         ),
