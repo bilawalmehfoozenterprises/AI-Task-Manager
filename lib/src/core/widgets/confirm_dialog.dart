@@ -19,7 +19,7 @@ Future<bool?> showConfirmDialog({
           onPressed: () => Navigator.of(context).pop(false),
           child: Text(cancelText),
         ),
-        FilledButton(
+        TextButton(
           onPressed: () => Navigator.of(context).pop(true),
           child: Text(confirmText),
         ),
