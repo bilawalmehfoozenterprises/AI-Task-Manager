@@ -3,10 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:lifely/src/features/task_list/data/task_list_repository.dart';
 import 'package:lifely/src/features/task_list/presentation/controller/letter_effect_controller.dart';
 import 'package:lifely/src/features/task_list/presentation/controller/task_list_controller.dart';
-import 'package:lifely/src/features/task_list/presentation/widgets/letter_layer.dart';
-import 'package:lifely/src/features/task_list/presentation/widgets/task_list_app_bar.dart';
-import 'package:lifely/src/features/task_list/presentation/widgets/task_list_fabs.dart';
-import 'package:lifely/src/features/task_list/presentation/widgets/task_list_view.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/letters/letter_layer.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/task_list/task_list_app_bar.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/task_list/task_list_fabs.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/task_list/task_list_view.dart';
 
 /// Home screen: tasks in two tabs, Pending and Completed.
 class TaskListScreen extends StatelessWidget {

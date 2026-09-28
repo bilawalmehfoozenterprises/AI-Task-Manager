@@ -1,11 +1,13 @@
 import 'dart:math';
 
 import 'package:material_ui/material_ui.dart';
-import 'package:lifely/src/features/task_list/presentation/controller/letter_burst.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/letters/letter_burst.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/letters/letter_sheet.dart';
 
 /// One flying letter: where it is, how it moves, and how visible it is.
 class LetterParticle({
-  required final TextPainter glyph,
+  required final LetterSheet sheet,
+  required final Rect spot,
   required final LetterMotion motion,
   required var Offset position,
   required var Offset velocity,
@@ -29,7 +31,8 @@ class LetterParticle({
   /// Starts [letter] moving the way [motion] asks, with a little randomness.
   factory LetterParticle.launch(
     Letter letter,
-    TextPainter glyph,
+    LetterSheet sheet,
+    Rect spot,
     LetterMotion motion,
     Random random,
   ) {
@@ -45,7 +48,8 @@ class LetterParticle({
       .blowAway => between(-9, -3),
     };
     return LetterParticle(
-      glyph: glyph,
+      sheet: sheet,
+      spot: spot,
       motion: motion,
       position: letter.rect.center,
       velocity: velocity,
@@ -53,7 +57,8 @@ class LetterParticle({
     );
   }
 
-  Size get size => glyph.size;
+  /// Size on screen; [spot] is the letter's place on [sheet], in pixels.
+  Size get size => spot.size / sheet.pixelRatio;
 
   /// 1 is fully visible, 0 is gone.
   double get opacity {

@@ -1,8 +1,10 @@
 import 'dart:math';
+import 'dart:ui' as ui;
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lifely/src/features/task_list/presentation/controller/letter_burst.dart';
-import 'package:lifely/src/features/task_list/presentation/controller/letter_simulation.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/letters/letter_burst.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/letters/letter_sheet.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/letters/letter_simulation.dart';
 import 'package:material_ui/material_ui.dart';
 
 void main() {
@@ -14,12 +16,18 @@ void main() {
   tearDown(() => simulation.dispose());
 
   void addLetters(LetterMotion motion, {int count = 1}) {
+    const letter = Size(16, 16);
+    final recorder = ui.PictureRecorder();
+    Canvas(recorder);
+    final image = recorder.endRecording().toImageSync(16, 16);
+    final sheet = LetterSheet(image, 1, count);
     for (var i = 0; i < count; i++) {
-      final glyph = TextPainter(
-        text: const TextSpan(text: 'A', style: TextStyle(fontSize: 16)),
-        textDirection: .ltr,
-      )..layout();
-      simulation.add(Letter('A', start & glyph.size), glyph, motion);
+      simulation.add(
+        Letter('A', start & letter),
+        sheet,
+        Offset.zero & letter,
+        motion,
+      );
     }
   }
 
@@ -47,6 +55,22 @@ void main() {
     final tops = simulation.particles.map((p) => p.position.dy);
     expect(simulation.particles.every((p) => p.landed), isTrue);
     expect(tops.reduce(min), lessThan(area.height - 20));
+  });
+
+  test('letters drop down when the letters under them fade away', () {
+    addLetters(.fall, count: 15);
+    run(1);
+    addLetters(.fall, count: 15);
+    run(1);
+    final newer = simulation.particles.skip(15).toList();
+    double highest() => newer.map((p) => p.position.dy).reduce(min);
+    final before = highest();
+
+    // The older letters fade out at 3 seconds; the newer ones show until 4.
+    run(1.6);
+    expect(simulation.particles, newer);
+    expect(newer.every((p) => p.landed), isTrue);
+    expect(highest(), greaterThan(before));
   });
 
   test('ticked letters fade away after resting on the pile', () {

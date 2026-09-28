@@ -1,7 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart' show RenderParagraph;
 import 'package:lifely/src/core/utils/context_extensions.dart';
-import 'package:lifely/src/features/task_list/presentation/controller/letter_burst.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/letters/letter_burst.dart';
 
 /// Breaks the task title shown by [title] into letters, each placed where it
 /// is drawn on screen. [row] is the task row; [tile] is the part of the row

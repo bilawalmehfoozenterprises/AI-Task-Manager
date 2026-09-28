@@ -4,8 +4,8 @@ import 'package:lifely/src/app/bootstrap.dart';
 import 'package:lifely/src/core/widgets/centered_message.dart';
 import 'package:lifely/src/features/task_editor/presentation/widgets/deadline_field.dart';
 import 'package:lifely/src/features/task_editor/presentation/widgets/task_editor_form.dart';
-import 'package:lifely/src/features/task_list/presentation/widgets/task_list_fabs.dart';
-import 'package:lifely/src/features/task_list/presentation/widgets/task_tile.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/task_list/task_list_fabs.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/task_list/task_tile.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

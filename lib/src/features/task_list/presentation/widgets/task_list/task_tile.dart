@@ -6,10 +6,10 @@ import 'package:lifely/src/core/routing/app_routes.dart';
 import 'package:lifely/src/core/utils/context_extensions.dart';
 import 'package:lifely/src/core/utils/date_formatter.dart';
 import 'package:lifely/src/core/widgets/confirm_dialog.dart';
-import 'package:lifely/src/features/task_list/presentation/controller/letter_burst.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/letters/letter_burst.dart';
 import 'package:lifely/src/features/task_list/presentation/controller/letter_effect_controller.dart';
 import 'package:lifely/src/features/task_list/presentation/controller/task_list_controller.dart';
-import 'package:lifely/src/features/task_list/presentation/widgets/task_title_letters.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/letters/task_title_letters.dart';
 import 'package:lifely/src/shared/task/domain/task.dart';
 
 /// One task row: tap to open, tick to complete, swipe left to delete.
