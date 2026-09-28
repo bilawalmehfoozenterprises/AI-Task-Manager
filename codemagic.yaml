@@ -12,12 +12,13 @@ workflows:
       groups:
         - firebase_secrets
         - github
-    triggering:
-      events:
-        - tag
-      tag_patterns:
-        - pattern: 'release-android-v*'
-          include: true
+    # Disabled for now: re-enable after pointing the secrets at the new Firebase project.
+    # triggering:
+    #   events:
+    #     - tag
+    #   tag_patterns:
+    #     - pattern: 'release-android-v*'
+    #       include: true
 
     scripts:
       - name: Set up Firebase Key File
@@ -93,12 +94,13 @@ workflows:
       groups:
         - firebase_secrets
         - github
-    triggering:
-      events:
-        - tag
-      tag_patterns:
-        - pattern: 'patch-android-*'
-          include: true
+    # Disabled for now: re-enable after pointing the secrets at the new Firebase project.
+    # triggering:
+    #   events:
+    #     - tag
+    #   tag_patterns:
+    #     - pattern: 'patch-android-*'
+    #       include: true
 
     scripts:
       - name: Set up Firebase Key File
