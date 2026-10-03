@@ -9,3 +9,4 @@ const darkSurfaceColor = Colors.black;
 const darkOnSurfaceColor = Colors.white;
 const darkErrorColor = Color.fromRGBO(255, 73, 73, 1);
 const darkOnErrorColor = Colors.white;
+const darkSuccessColor = Color.fromRGBO(76, 217, 130, 1);

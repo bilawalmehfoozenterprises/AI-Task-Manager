@@ -2,11 +2,12 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:lifely/src/core/constants/app_sizes.dart';
 import 'package:lifely/src/core/routing/app_routes.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/refresh/refresh_comparison_fab.dart';
 
 const kAddTaskKey = ValueKey('Add-Task');
 const kAiAssistantKey = ValueKey('AI-Assistant');
 
-/// The two floating buttons: open the AI assistant, or add a task by hand.
+/// The floating buttons (plus the temporary refresh comparison): open the AI assistant, or add a task by hand.
 class const TaskListFabs({super.key}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -15,6 +16,7 @@ class const TaskListFabs({super.key}) extends StatelessWidget {
       mainAxisAlignment: .end,
       crossAxisAlignment: .end,
       children: [
+        const RefreshComparisonFab(),
         FloatingActionButton(
           key: kAiAssistantKey,
           heroTag: 'ai_fab',

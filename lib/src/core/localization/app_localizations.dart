@@ -303,6 +303,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Voice input isn\'t available.'**
   String get voiceUnavailable;
+
+  /// No description provided for @compareRefresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Compare refresh animations'**
+  String get compareRefresh;
+
+  /// No description provided for @refreshPreviewLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Animation preview only. Your tasks are not changed.'**
+  String get refreshPreviewLabel;
+
+  /// No description provided for @refreshTornado.
+  ///
+  /// In en, this message translates to:
+  /// **'Tornado'**
+  String get refreshTornado;
+
+  /// No description provided for @refreshBuddy.
+  ///
+  /// In en, this message translates to:
+  /// **'Buddy'**
+  String get refreshBuddy;
+
+  /// No description provided for @refreshPreviewButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get refreshPreviewButton;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @refreshBusy.
+  ///
+  /// In en, this message translates to:
+  /// **'Wait for the current refresh to finish.'**
+  String get refreshBusy;
+
+  /// No description provided for @refreshReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Release to refresh'**
+  String get refreshReady;
+
+  /// No description provided for @refreshWorking.
+  ///
+  /// In en, this message translates to:
+  /// **'Refreshing'**
+  String get refreshWorking;
+
+  /// No description provided for @refreshDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Refreshed'**
+  String get refreshDone;
+
+  /// No description provided for @refreshFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh failed. Pull down to try again.'**
+  String get refreshFailed;
 }
 
 class _AppLocalizationsDelegate

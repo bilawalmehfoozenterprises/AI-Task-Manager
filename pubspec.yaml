@@ -31,6 +31,8 @@ dependencies:
   firebase_app_check: 0.4.8
   speech_to_text: 7.5.0
   permission_handler: 13.0.2
+  custom_refresh_indicator: 4.0.2
+  rive: 0.14.11
 
 dev_dependencies:
   flutter_test:
@@ -43,6 +45,7 @@ dev_dependencies:
   drift_dev: 2.35.0
   flutter_launcher_icons: 0.14.4
   mocktail: 1.0.4
+  fake_async: 1.3.3
 
 
 # Custom app icon. For more info see: https://pub.dev/packages/flutter_launcher_icons
@@ -63,4 +66,5 @@ flutter:
 
   assets:
     - assets/
+    - assets/animations/
     - shorebird.yaml
