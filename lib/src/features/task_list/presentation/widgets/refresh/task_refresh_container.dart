@@ -86,30 +86,35 @@ class _TaskRefreshContainerState extends State<TaskRefreshContainer> {
     if (!refreshComparisonEnabled) {
       return widget.builder(context, const SliverToBoxAdapter(), null);
     }
-    return CustomRefreshIndicator(
-      key: _key,
-      controller: _controller,
-      autoRebuild: false,
-      offsetToArmed: Sizes.refreshArmDistance,
-      durations: const .new(
-        cancelDuration: refreshCancelDuration,
-        settleDuration: refreshSettleDuration,
-        finalizeDuration: refreshCollapseDuration,
-        completeDuration: refreshCompleteDuration,
-      ),
-      onRefresh: _refresh,
-      onStateChanged: (change) {
-        if (change.didChange(to: .armed)) HapticFeedback.lightImpact();
-        if (change.didChange(to: .idle)) _preview.finish();
+    return SignalBuilder(
+      builder: (context) {
+        final variant = _preview.latched.value ?? _preview.selected.value;
+        return CustomRefreshIndicator(
+          key: _key,
+          controller: _controller,
+          autoRebuild: false,
+          offsetToArmed: Sizes.refreshArmDistance,
+          durations: .new(
+            cancelDuration: refreshCancelDuration,
+            settleDuration: refreshSettleDuration,
+            finalizeDuration: refreshCollapseDuration,
+            completeDuration: refreshCompleteDuration(variant),
+          ),
+          onRefresh: _refresh,
+          onStateChanged: (change) {
+            if (change.didChange(to: .armed)) HapticFeedback.lightImpact();
+            if (change.didChange(to: .idle)) _preview.finish();
+          },
+          builder: (context, child, _) => child,
+          child: widget.builder(
+            context,
+            TaskRefreshHeader(controller: _controller),
+            AlwaysScrollableScrollPhysics(
+              parent: ClampingWithOverscrollPhysics(state: _controller),
+            ),
+          ),
+        );
       },
-      builder: (context, child, _) => child,
-      child: widget.builder(
-        context,
-        TaskRefreshHeader(controller: _controller),
-        AlwaysScrollableScrollPhysics(
-          parent: ClampingWithOverscrollPhysics(state: _controller),
-        ),
-      ),
     );
   }
 }
