@@ -1,6 +1,4 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:lifely/src/core/constants/app_sizes.dart';
-import 'package:lifely/src/core/layout/window_size_class.dart';
 import 'package:lifely/src/core/widgets/centered_message.dart';
 import 'package:lifely/src/features/task_list/presentation/widgets/refresh/task_refresh_container.dart';
 import 'package:lifely/src/features/task_list/presentation/widgets/task_list/task_tile.dart';
@@ -47,15 +45,9 @@ class TaskTab extends StatelessWidget {
             child: CenteredMessage(message: emptyMessage),
           )
         else
-          SliverPadding(
-            padding: .symmetric(
-              horizontal: context.windowSizeClass.margin,
-              vertical: Sizes.p8,
-            ),
-            sliver: SliverList.builder(
-              itemCount: tasks.length,
-              itemBuilder: (context, index) => TaskTile(task: tasks[index]),
-            ),
+          SliverList.builder(
+            itemCount: tasks.length,
+            itemBuilder: (context, index) => TaskTile(task: tasks[index]),
           ),
       ],
     );
