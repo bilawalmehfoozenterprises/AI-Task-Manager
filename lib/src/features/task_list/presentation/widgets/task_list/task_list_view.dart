@@ -20,11 +20,13 @@ class TaskListView extends SignalWidget {
         children: [
           TaskTab(
             name: 'pending',
+            tabIndex: 0,
             tasks: controller.pendingTasks.value,
             emptyMessage: context.loc.noTasksFound,
           ),
           TaskTab(
             name: 'completed',
+            tabIndex: 1,
             tasks: controller.completedTasks.value,
             emptyMessage: context.loc.noCompletedTasks,
           ),

@@ -9,4 +9,10 @@ abstract final class Sizes {
   static const p32 = 32.0;
   static const p48 = 48.0;
   static const p64 = 64.0;
+
+  // Home pull-to-refresh header (see refresh_preview_options.dart).
+  static const refreshArmDistance = 96.0;
+  static const refreshSettledExtent = 144.0;
+  static const refreshMaxExtent = 176.0;
+  static const refreshVisualWidth = 240.0;
 }

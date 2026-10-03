@@ -2,8 +2,10 @@ import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:lifely/src/features/task_list/data/task_list_repository.dart';
 import 'package:lifely/src/features/task_list/presentation/controller/letter_effect_controller.dart';
+import 'package:lifely/src/features/task_list/presentation/controller/refresh_preview_controller.dart';
 import 'package:lifely/src/features/task_list/presentation/controller/task_list_controller.dart';
 import 'package:lifely/src/features/task_list/presentation/widgets/letters/letter_layer.dart';
+import 'package:lifely/src/features/task_list/presentation/widgets/refresh/refresh_rive_file.dart';
 import 'package:lifely/src/features/task_list/presentation/widgets/task_list/task_list_app_bar.dart';
 import 'package:lifely/src/features/task_list/presentation/widgets/task_list/task_list_fabs.dart';
 import 'package:lifely/src/features/task_list/presentation/widgets/task_list/task_list_view.dart';
@@ -21,6 +23,14 @@ class TaskListScreen extends StatelessWidget {
           create: (context) =>
               TaskListController(context.read(), context.read()),
           dispose: (_, controller) => controller.dispose(),
+        ),
+        Provider(
+          create: (context) => RefreshPreviewController(context.read()),
+          dispose: (_, controller) => controller.dispose(),
+        ),
+        Provider(
+          create: (context) => RefreshRiveFile(context.read()),
+          dispose: (_, file) => file.dispose(),
         ),
         Provider(
           create: (_) => LetterEffectController(),

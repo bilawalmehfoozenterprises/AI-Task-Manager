@@ -115,4 +115,38 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get voiceUnavailable => 'Voice input isn\'t available.';
+
+  @override
+  String get compareRefresh => 'Compare refresh animations';
+
+  @override
+  String get refreshPreviewLabel =>
+      'Animation preview only. Your tasks are not changed.';
+
+  @override
+  String get refreshTornado => 'Tornado';
+
+  @override
+  String get refreshBuddy => 'Buddy';
+
+  @override
+  String get refreshPreviewButton => 'Preview';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get refreshBusy => 'Wait for the current refresh to finish.';
+
+  @override
+  String get refreshReady => 'Release to refresh';
+
+  @override
+  String get refreshWorking => 'Refreshing';
+
+  @override
+  String get refreshDone => 'Refreshed';
+
+  @override
+  String get refreshFailed => 'Refresh failed. Pull down to try again.';
 }
