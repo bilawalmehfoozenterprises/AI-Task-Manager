@@ -24,14 +24,12 @@ final darkTheme = ThemeData(
 
   // [List Tile Theme]
   listTileTheme: const ListTileThemeData(
-    tileColor: darkSurfaceColor,
     titleTextStyle: TextStyle(
       color: darkOnSurfaceColor,
       fontWeight: .normal,
       decorationThickness: 2,
     ),
     subtitleTextStyle: TextStyle(color: darkOnSecondaryColor),
-    shape: RoundedRectangleBorder(),
   ),
 
   // [Check Box Theme]
