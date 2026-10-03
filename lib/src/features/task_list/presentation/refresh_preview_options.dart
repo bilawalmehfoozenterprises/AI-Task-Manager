@@ -14,9 +14,9 @@ const refreshPreviewTimeout = Duration(seconds: 10);
 
 const refreshSettleDuration = Duration(milliseconds: 180);
 const refreshCancelDuration = Duration(milliseconds: 200);
-const refreshBuddyCompleteDuration = Duration(milliseconds: 1400);
+const refreshBuddyCompleteDuration = Duration(milliseconds: 1300);
 const refreshTornadoCompleteDuration = Duration(milliseconds: 900);
-const refreshCollapseDuration = Duration(milliseconds: 220);
+const refreshCollapseDuration = Duration(milliseconds: 140);
 
 Duration refreshCompleteDuration(RefreshVariant variant) => switch (variant) {
   .buddy => refreshBuddyCompleteDuration,
